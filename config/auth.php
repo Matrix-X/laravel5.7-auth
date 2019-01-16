@@ -42,8 +42,12 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
+        ],
+        'apiStaff' => [
+            'driver' => 'passport',
+            'provider' => 'staffs',
         ],
     ],
 
@@ -67,7 +71,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Model\User::class,
+        ],
+
+        'staffs' => [
+            'driver' => 'eloquent',
+            'model' => App\Model\Staff::class,
         ],
 
         // 'users' => [
@@ -97,6 +106,24 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Get API guards from provider
+    |--------------------------------------------------------------------------
+    |
+    |THis configuration is designed for config middleware
+    |in the router api controller
+	|
+    */
+
+    // key: provider
+    // value: guard
+    'providerToGuard' => [
+        'users' => 'api',
+        'staffs' => 'apiStaff',
+        'client' => 'client',
     ],
 
 ];
